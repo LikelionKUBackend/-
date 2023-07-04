@@ -1,4 +1,23 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
 <h1>{{ question.subject }}</h1>
 <div>
     {{ question.content }}
 </div>
+
+
+{% for answer in answer_list %}
+    <li>{{ answer.content }}</li>
+{% endfor %}
+
+<!--question에 있는 foreign key를 이용하는 방법-->
+{% for answer in question.answer_set.all %}
+    <li>{{ answer.content }}</li>
+{% endfor %}
+
+<form action="{% url 'pybo:answer_create' question.id %}" method="post">
+    {% csrf_token %}
+    <textarea name="content" id="content" rows="15"></textarea>
+    <input type="submit" value="답변등록">
+</form>

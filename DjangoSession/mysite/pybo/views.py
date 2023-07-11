@@ -20,3 +20,19 @@ def answer_create(request, question_id):
     answer = Answer(question=question, content=request.POST.get('content'), create_date=timezone.now())
     answer.save()
     return redirect('pybo:detail', question_id=question.id)
+
+
+
+def question_form(request):
+    return render(request, 'pybo/question_form.html')
+
+
+def question_create(request):
+    author = request.user
+    question = Question(author = author, subject = request.POST.get('subject'), content=request.POST.get('content'), create_date=timezone.now())
+    question.save()
+    return redirect('pybo:index')
+    #return redirect('pybo:detail', question_id=question.id)
+
+
+    

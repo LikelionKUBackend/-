@@ -11,4 +11,9 @@ urlpatterns = [
     path('answer/create/<int:question_id>/', views.answer_create, name='answer_create'),
     path('question/form', views.question_form, name = 'question_form'),
     path('question/create', views.question_create, name = 'question_create'),
+    path('question/modify/<int:question_id>/', views.question_modify, name='question_modify'),
+    path('question/delete/<int:question_id>/', views.question_delete, name='question_delete'),
+    path('question/star/<int:question_id>/', views.question_stars, name='question_stars'),
+    path('apitest', views.QuestionListAPI),
+    path('api/question/create', views.create_question_by_api),
 ]

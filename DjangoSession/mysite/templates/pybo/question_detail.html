@@ -3,6 +3,14 @@
 <div class="container my-3">
     <!-- 질문 -->
     <h2 class="border-bottom py-2">{{ question.subject }}</h2>
+    <a href="{% url 'pybo:question_stars' question.id %} ">즐겨찾기 등록  {{ question.star.count }}</a>
+    <div>퍼간 사람</div>
+    {% for user in question.star.all %}
+    <div>
+        {{ user.username }}
+    </div>
+    {% endfor %}
+
     <div class="card my-3">
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;">{{ question.content }}</div>
@@ -10,6 +18,14 @@
                 <div class="badge bg-light text-dark p-2">
                     {{ question.create_date }}
                 </div>
+            </div>
+            <div class="my-3">
+                {% if request.user == question.author %}
+                <a href="{% url 'pybo:question_modify' question.id  %}" 
+                   class="btn btn-sm btn-outline-secondary">수정</a>
+                <a href="{% url 'pybo:question_delete' question.id  %}" class="delete btn btn-sm btn-outline-secondary">
+                    삭제</a>
+                {% endif %}
             </div>
         </div>
     </div>
